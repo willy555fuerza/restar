@@ -1,0 +1,266 @@
+
+/* user will         */
+
+
+
+
+CREATE TABLE usuario (
+    id_usuario SERIAL PRIMARY KEY,
+    nombres VARCHAR(150) COLLATE "C" NOT NULL,
+    apellidos VARCHAR(150) COLLATE "C" NOT NULL,
+    foto bytea null,
+    perfil VARCHAR(20) COLLATE "C" NULL,
+    usuario VARCHAR(100) COLLATE "C" UNIQUE NOT NULL,
+    contraseña VARCHAR(200) COLLATE "C" NOT NULL,
+    fecha_registro TIMESTAMP NOT NULL,
+    estado BOOLEAN DEFAULT TRUE
+);		
+
+INSERT INTO usuario (nombres, apellidos, foto, perfil, usuario, contraseña,   fecha_registro)
+VALUES 
+('LUNA', 'ROSA', null, 'Administrador', 'willy', '$2a$12$p7nbpolyn/E1GV8EYzGgE.kssTEvozi7ncTLC3HAkQqBjxhqCbSRm', CURRENT_TIMESTAMP),
+('MARY', 'FLORES', null, 'Administrador', 'mary', '$2a$12$p7nbpolyn/E1GV8EYzGgE.kssTEvozi7ncTLC3HAkQqBjxhqCbSRm', CURRENT_TIMESTAMP),
+('SOL', 'TORREZ', null, 'Administrador', 'pato', '$2a$12$p7nbpolyn/E1GV8EYzGgE.kssTEvozi7ncTLC3HAkQqBjxhqCbSRm', CURRENT_TIMESTAMP),
+('BELEN', 'ROSA', null, 'Administrador', 'belen', '$2a$12$p7nbpolyn/E1GV8EYzGgE.kssTEvozi7ncTLC3HAkQqBjxhqCbSRm', CURRENT_TIMESTAMP),
+('LIZ', 'ROOS', null, 'Administrador', 'lyan', '$2a$12$p7nbpolyn/E1GV8EYzGgE.kssTEvozi7ncTLC3HAkQqBjxhqCbSRm', CURRENT_TIMESTAMP),
+('NELZY', 'RAMIREZ', null, 'Administrador', 'will', '$2a$12$p7nbpolyn/E1GV8EYzGgE.kssTEvozi7ncTLC3HAkQqBjxhqCbSRm', CURRENT_TIMESTAMP),
+('LYAN', 'GONZALES', null, 'Administrador', 'sol', '$2a$12$p7nbpolyn/E1GV8EYzGgE.kssTEvozi7ncTLC3HAkQqBjxhqCbSRm', CURRENT_TIMESTAMP),
+('PATO', 'SAA', null, 'Administrador', 'mar', '$2a$12$p7nbpolyn/E1GV8EYzGgE.kssTEvozi7ncTLC3HAkQqBjxhqCbSRm', CURRENT_TIMESTAMP),
+('JESSICA', 'RODRIGEZ', null, 'Administrador', 'lu', '$2a$12$p7nbpolyn/E1GV8EYzGgE.kssTEvozi7ncTLC3HAkQqBjxhqCbSRm', CURRENT_TIMESTAMP),
+('LUZ', 'YOSELIN', null, 'Administrador', 'jessi', '$2a$12$p7nbpolyn/E1GV8EYzGgE.kssTEvozi7ncTLC3HAkQqBjxhqCbSRm', CURRENT_TIMESTAMP);
+
+select * from usuario;
+	
+
+
+--1.	Seleccionar todos los usuario:
+SELECT * 
+FROM usuario;
+
+
+--2.	Seleccionar solo el nombre y apellido de los empleados:
+SELECT nombres, apellidos 
+FROM usuario;	
+
+
+--12.	Seleccionar todos los empleados ordenados alfabéticamente por apellido:
+SELECT * FROM usuario
+ORDER BY  apellidos;
+
+
+--13.	Contar la cantidad de empleados en el departamento de Ventas:
+SELECT COUNT(*) AS Total_Users 
+FROM usuario WHERE  id_usuario = 1;
+
+
+
+--18.	Contar la cantidad de empleados por departamento:
+SELECT id_usuario, COUNT(*) AS Total_Us
+FROM usuario 
+GROUP BY id_usuario;
+
+
+
+--19.	Seleccionar los empleados cuyo nombre comience con 'M':
+SELECT * 
+FROM usuario
+WHERE nombres LIKE 'L%';
+
+
+--20.	Seleccionar los empleados que no sean del departamento de IT:
+SELECT * 
+FROM usuario
+WHERE id_usuario!= 1;
+
+/* table miembro*/
+
+
+CREATE TABLE miembro (
+  id_miembro SERIAL PRIMARY KEY,
+  nombres VARCHAR(150) COLLATE "C" NOT NULL,
+  apellidos VARCHAR(150) COLLATE "C" NOT NULL,
+	ci VARCHAR(150) COLLATE "C" NOT NULL,
+	dirrecion VARCHAR(150) COLLATE "C" NOT NULL,
+	telefono INTEGER NOT NULL,
+	fecha_naci DATE NOT NULL,
+  registro_fecha DATE NOT NULL,
+  estado BOOLEAN DEFAULT TRUE
+);
+
+insert into miembro(nombres,apellidos,ci,dirrecion,telefono,fecha_naci,registro_fecha) values 
+('LUZ','ROSE','89696986','LA GUARDIA','67735546','1994-09-18','2022-01-13'),
+('SARA','TORREZ','89696986','LA GUARDIA','67735546','1994-09-18','2022-01-13'),
+('LUZ','DAZA','89696986','LA GUARDIA','67735546','1994-09-18','2022-01-13'),
+('STEFANNI','','89696986','LA GUARDIA','67735546','1994-09-18','2022-01-13').
+('LIZ','QUBYTESOFT','89696986','LA GUARDIA','67735546','1994-09-18','2022-01-13'),
+('PATO','QUBYTESOFT','89696986','LA GUARDIA','67735546','1994-09-18','2022-01-13'),
+('TIM','QUBYTESOFT','89696986','LA GUARDIA','67735546','1994-09-18','2022-01-13'),
+('SOL','QUBYTESOFT','89696986','LA GUARDIA','67735546','1994-09-18','2022-01-13'),
+('ROOS','QUBYTESOFT','89696986','LA GUARDIA','67735546','1994-09-18','2022-01-13'),
+('CAMI','QUBYTESOFT','89696986','LA GUARDIA','67735546','1994-09-18','2022-01-13'),
+('BELEN','QUBYTESOFT','89696986','LA GUARDIA','67735546','1994-09-18','2022-01-13'),
+('LU','QUBYTESOFT','89696986','LA GUARDIA','67735546','1994-09-18','2022-01-13');
+
+select * from miembro;
+
+
+--8.	Seleccionar los empleados que fueron contratados después de cierta fecha:
+SELECT * 
+FROM miembro
+WHERE fecha_naci > '<1994-04-21>';
+
+
+--11.	Seleccionar el nombre y apellido de todos los empleados:
+SELECT nombres,  apellidos 
+FROM  miembro;
+
+
+--17.	Seleccionar los empleados contratados en el año 2020:
+SELECT * 
+FROM miembro
+WHERE YEAR(dirrecion) = 3;
+
+/* table ministerio*/
+
+
+CREATE TABLE ministerio (
+    id_ministerio SERIAL PRIMARY KEY,
+    nombre VARCHAR(150) COLLATE "C" NOT NULL,
+    descripcion VARCHAR(150) COLLATE "C" NOT NULL,
+    registro_fecha DATE NOT NULL,
+    estado BOOLEAN DEFAULT TRUE
+);
+
+insert into ministerio(nombre,descripcion,registro_fecha) values
+('START','QUBYTESOFT','2022-01-13'),
+('MUSIC','QUBYTESOFT','2022-01-13'),
+('EVANGELISMO','QUBYTESOFT','2022-01-13'),
+('DANZA','QUBYTESOFT','2022-01-13'),
+('JUBILO','QUBYTESOFT','2022-01-13'),
+('ADORACION','QUBYTESOFT','2022-01-13'),
+('RESTART','QUBYTESOFT','2022-01-13'),
+('MIN. DE JOVENES','QUBYTESOFT','2022-01-13'),
+('THE BEST MUSIC','QUBYTESOFT','2022-01-13');
+
+select * from ministerio;
+
+--4.	Contar la cantidad total de empleados:
+
+SELECT COUNT(*) AS Total_Ministerios 
+FROM ministerio;
+
+
+--9.	Seleccionar los empleados que tienen un cargo específico:
+SELECT *
+FROM ministerio 
+WHERE id_ministerio = 57;
+
+
+
+/* table de tipo ingresos */
+
+
+CREATE TABLE tipo_ingresos (
+    id_tipo_ingresos SERIAL PRIMARY KEY,
+    nombre VARCHAR(150) COLLATE "C" NOT NULL,
+    registro_fecha DATE NOT NULL,
+    estado BOOLEAN DEFAULT TRUE
+);
+
+INSERT INTO tipo_ingresos (nombre, registro_fecha)
+VALUES 
+('Diezmos', '2021-07-18'),
+('Ofrendas', '2022-09-10'),
+('Donaciones', '2024-01-13'),
+('Aportes', '2012-09-13'),
+('Ofrendas de amor', '2001-04-21'),
+('Ayuda Social', '2023-07-11'),
+('Servicios Basicos', '2002-04-21');
+
+select * from tipo_ingresos;
+
+
+--3.	Seleccionar los empleados que tienen un salario mayor a cierto valor:
+SELECT * 
+FROM tipo_ingresos 
+WHERE id_tipo_ingresos > 18;
+
+
+
+
+--5.	Seleccionar los empleados ordenados por su salario de forma descendente:
+SELECT * 
+FROM tipo_ingresos 
+ORDER BY id_tipo_ingresos DESC;
+
+--6.	Seleccionar los empleados que pertenecen a un departamento específico:
+SELECT *
+FROM tipo_ingresos 
+WHERE id_tipo_ingresos = 15;
+
+
+--10.	Calcular el salario máximo y mínimo de todos los empleados:
+SELECT MAX(nombre) AS nombre_Maximo, MIN(nombre) AS nombre_Minimo 
+FROM  tipo_ingresos ;
+
+
+--14.	Seleccionar los empleados con un salario entre 2000 y 3000:
+
+SELECT * 
+FROM tipo_ingresos 
+WHERE id_tipo_ingresos BETWEEN 7 AND 22;
+
+
+--15.	Seleccionar el empleado con el salario más alto:
+SELECT * 
+FROM tipo_ingresos  
+WHERE id_tipo_ingresos = (SELECT MAX(id_tipo_ingresos) FROM tipo_ingresos);
+
+
+
+--16.	Calcular el promedio de salario de los empleados del departamento de Marketing:
+SELECT AVG(id_tipo_ingresos) AS ProedioSalarioVentas 
+FROM tipo_ingresos WHERE id_tipo_ingresos = 15;
+
+
+/* table de  ingresos */
+
+
+CREATE TABLE ingreso (
+    id_ingreso SERIAL PRIMARY KEY,
+    monto DECIMAL(10, 2) NULL, -- Cambiado a tipo DECIMAL
+    fecha_ingreso TIMESTAMP NOT NULL,
+    estado BOOLEAN DEFAULT TRUE,
+	
+    id_usuario INTEGER REFERENCES usuario(id_usuario),
+    id_tipo_ingresos INTEGER REFERENCES tipo_ingresos(id_tipo_ingresos),
+    id_miembro INTEGER REFERENCES miembro(id_miembro)
+); 
+ 
+ INSERT INTO ingreso (monto, fecha_ingreso, estado, id_usuario, id_tipo_ingresos, id_miembro)VALUES 
+   (5.99, CURRENT_TIMESTAMP, TRUE, 1, 6,4),
+   (7.99, CURRENT_TIMESTAMP, TRUE, 1, 6,4),
+   (15.99, CURRENT_TIMESTAMP, TRUE, 1, 6,4),
+   (21.99, CURRENT_TIMESTAMP, TRUE, 1, 6,4),
+   (49.99, CURRENT_TIMESTAMP, TRUE, 1, 6,4),
+   (25.99, CURRENT_TIMESTAMP, TRUE, 1, 6,4),
+   (45.99, CURRENT_TIMESTAMP, TRUE, 1, 6,4);
+
+SELECT * FROM ingreso
+
+SELECT * FROM tipo_ingresos WHERE id_tipo_ingresos = 7;
+
+SELECT * FROM ingreso
+
+--7.	Calcular el promedio de salario de todos los empleados:
+SELECT AVG(monto) AS Promedio_monto 
+FROM ingreso;
+
+
+
+
+SELECT i.*, u.nombres,t.nombre, m.nombres
+        FROM ingreso i
+				LEFT JOIN usuario u ON i.id_usuario = u.id_usuario
+        LEFT JOIN tipo_ingresos t ON i.id_tipo_ingresos = t.id_tipo_ingresos 
+        LEFT JOIN miembro m ON i.id_miembro = m.id_miembro
